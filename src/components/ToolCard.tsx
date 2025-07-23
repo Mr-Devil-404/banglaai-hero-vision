@@ -1,15 +1,24 @@
 
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface ToolCardProps {
   title: string;
   description: string;
   icon: LucideIcon;
   color: string;
+  href?: string;
 }
 
-const ToolCard: React.FC<ToolCardProps> = ({ title, description, icon: Icon, color }) => {
+const ToolCard: React.FC<ToolCardProps> = ({ title, description, icon: Icon, color, href }) => {
+  const navigate = useNavigate();
+
+  const handleTryNow = () => {
+    if (href) {
+      navigate(href);
+    }
+  };
   return (
     <div className="group relative">
       <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity duration-300"></div>
@@ -29,8 +38,16 @@ const ToolCard: React.FC<ToolCardProps> = ({ title, description, icon: Icon, col
         </p>
         
         <div className="flex justify-center">
-          <button className="px-6 py-2 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 font-medium rounded-full transition-all duration-200 shadow-sm hover:shadow-md">
-            Try Now
+          <button 
+            onClick={handleTryNow}
+            disabled={!href}
+            className={`px-6 py-2 bg-gradient-to-r font-medium rounded-full transition-all duration-200 shadow-sm hover:shadow-md ${
+              href 
+                ? 'from-purple-100 to-blue-100 hover:from-purple-200 hover:to-blue-200 text-purple-800 cursor-pointer' 
+                : 'from-gray-100 to-gray-200 text-gray-500 cursor-not-allowed'
+            }`}
+          >
+            {href ? 'Try Now' : 'Coming Soon'}
           </button>
         </div>
         

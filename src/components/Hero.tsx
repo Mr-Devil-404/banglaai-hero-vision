@@ -10,7 +10,8 @@ const Hero = () => {
       title: "Bangla ChatGPT",
       description: "বাংলায় AI চ্যাটবট",
       icon: MessageCircle,
-      color: "from-purple-500 to-pink-500"
+      color: "from-purple-500 to-pink-500",
+      href: "/bangla-chat"
     },
     {
       title: "Bangla Text-to-Voice",
